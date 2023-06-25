@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <None Remove="Client\" />
+    <None Remove="TestData\CreateIssue.json" />
+    <None Remove="TestData\GetIssue.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Client\" />
@@ -37,7 +39,7 @@
     </Content>
     <None Remove="TestData\CreateProject.json" />
     <Content Include="TestData\CreateProject.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="TestData\GetProject">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -45,6 +47,12 @@
     <None Remove="TestData\GetProject.json" />
     <Content Include="TestData\GetProject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CreateIssue.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\GetIssue.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 </Project>

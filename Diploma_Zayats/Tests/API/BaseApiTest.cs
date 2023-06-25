@@ -7,11 +7,13 @@ public class BaseApiTest
 {
     protected ApiClient _apiClient;
     protected ProjectService _projectService;
-    
+    protected IssueService _issueService;
+
     [OneTimeSetUp]
     public void InitApiClient()
     {
         _apiClient = new ApiClient();
         _projectService = new ProjectService(_apiClient);
+        _issueService = new IssueService(_apiClient);
     }
 }

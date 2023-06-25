@@ -2,19 +2,17 @@ using System.Net;
 using RestSharp;
 using Diploma_Zayats.Client;
 using Diploma_Zayats.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NLog;
-
+using Diploma_Zayats.Utilities.Configuration;
 
 namespace Diploma_Zayats.Services;
 
 public class ProjectService : BaseService
 {
-    public static readonly string GET_ALL_PPROJECT = "/projects";
     public static readonly string GET_PPROJECT = "api/v1/projects/{projectId}";
+    public static readonly string ARCHIVE_PPROJECT = "api/v1/project/{projectId}/archive";
     public static readonly string ADD_PPROJECT = "api/v1/projects";
-    
+
     public ProjectService(ApiClient apiClient) : base(apiClient)
     {
     }
@@ -34,32 +32,34 @@ public class ProjectService : BaseService
 
         return null;
     }
-    
-    public Project AddProject(Project project1)
-    {
-        var request = new RestRequest(ADD_PPROJECT, Method.Post)
-            .AddHeader("Content-Type", "application/json")
-            .AddBody(project1);
 
-        return _apiClient.Execute<Project>(request);
-        
-        // var request = new RestRequest(ADD_PPROJECT, Method.Post)
-        //     .AddHeader("Content-Type", "application/json")
-        //     .AddJsonBody(project);
-        //
-        // var response = _apiClient.Execute(request);
-        //
-        // if (response.StatusCode == System.Net.HttpStatusCode.Created)
-        // {
-        //     var responseData = JsonConvert.DeserializeObject<Project>(response.Content);
-        //     return responseData;
-        // }
-        // else
-        // {
-        //     Console.WriteLine(response.Content); // Print the response content for debugging
-        // }
-        //
-        // return null;
+    public bool ArchiveProject(int projectId)
+    {
+
+        var request = new RestRequest(ARCHIVE_PPROJECT, Method.Post)
+            .AddUrlSegment("projectId", projectId)
+            .AddHeader("Content-Type", "application/json")
+            .AddBody("");
+
+        var response =  _apiClient.Execute(request);
+
+        return response.IsSuccessful;
     }
 
+    //Doesnt't work. Problems with json... maybe TestDataHelper. If I use Postman - all OK
+    //public Project AddProject(string projectName, int symbolId)
+    //{
+
+    //    var request = new RestRequest(ADD_PPROJECT, Method.Post)
+    //        .AddHeader("Content-Type", "application/json")
+    //        .AddHeader("Authorization", "Bearer " + Configurator.Admin.Token)
+    //        .AddJsonBody(new
+    //    {
+    //        name = projectName,
+    //        symbol_id = symbolId
+    //    });
+
+    //    return _apiClient.Execute<Project>(request);
+    //}
 }
+

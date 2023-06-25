@@ -1,6 +1,6 @@
+using System.Net;
 using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Text.Json.Serialization;
+
 
 namespace Diploma_Zayats.Models;
 
@@ -10,8 +10,9 @@ public class Project
     [JsonProperty("symbol_id")] public int SymbolId { get; set; }
     [JsonProperty("id")] public int Id { get; set; }
     [JsonProperty("description")] public string Description { get; set; }
-    [JsonProperty("starts_at")] public DateTime StartsAt { get; set; }
-    [JsonProperty("ends_at")] public DateTime EndsAt { get; set; }
+    [JsonProperty("starts_at")] public DateTime? StartsAt { get; set; }
+    [JsonProperty("ends_at")] public DateTime? EndsAt { get; set; }
+    [JsonProperty("deleted_at")] public DateTime? DeletedAt { get; set; }
     [JsonProperty("uses_applications")] public bool UsesApplications { get; set; }
     [JsonProperty("uses_requirements")] public bool UsesRequirements { get; set; }
     [JsonProperty("uses_risks")] public bool UsesRisks { get; set; }
@@ -20,14 +21,15 @@ public class Project
     [JsonProperty("completed")] public bool Completed { get; set; }
     
     [JsonProperty("url")] public string Url { get; set; }
+
     protected bool Equals(Project other)
     {
-        return Name == other.Name && Id == other.Id && Description == other.Description && StartsAt == other.StartsAt && EndsAt == other.EndsAt && UsesIssues == other.UsesIssues && UsesRequirements == other.UsesRequirements && Completed == other.Completed;
+        return Name == other.Name && Description == other.Description && StartsAt == other.StartsAt && EndsAt == other.EndsAt && UsesIssues == other.UsesIssues && UsesRequirements == other.UsesRequirements && Completed == other.Completed && DeletedAt == other.DeletedAt;
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Name, Id, Description, StartsAt, EndsAt, UsesIssues, UsesRequirements, Completed);
+        return HashCode.Combine(Name, Description, StartsAt, EndsAt, UsesIssues, UsesRequirements, Completed, DeletedAt);
     }
 
     public override bool Equals(object? obj)
@@ -41,6 +43,6 @@ public class Project
 
     public override string ToString()
     {
-        return $"\n {nameof(Id)}: {Id}, \n {nameof(Name)}: {Name},\n {nameof(SymbolId)}: {SymbolId},\n {nameof(Description)}: {Description},\n {nameof(StartsAt)}: {StartsAt}, \n {nameof(EndsAt)}: {EndsAt},\n {nameof(UsesIssues)}: {UsesIssues},\n {nameof(UsesRequirements)}: {UsesRequirements},\n {nameof(Completed)}: {Completed}";
+        return $"\n {nameof(Id)}: {Id}, \n {nameof(Name)}: {Name},\n {nameof(SymbolId)}: {SymbolId},\n {nameof(Description)}: {Description},\n {nameof(StartsAt)}: {StartsAt}, \n {nameof(EndsAt)}: {EndsAt},\n {nameof(UsesIssues)}: {UsesIssues},\n {nameof(UsesRequirements)}: {UsesRequirements},\n {nameof(Completed)}: {Completed}, \n {nameof(DeletedAt)}: {DeletedAt}";
     }
 }
