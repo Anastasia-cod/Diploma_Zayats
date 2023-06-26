@@ -6,8 +6,8 @@ using NLog;
 
 namespace Diploma_Zayats.Tests.API
 {
-	public class RequirementTest : BaseApiTest
-	{
+    public class RequirementTest : BaseApiTest
+    {
         protected Requirement expectedRequirementForGet = TestDataHelper.GetRequirementFromJsonFile("GetRequirement.json");
 
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();

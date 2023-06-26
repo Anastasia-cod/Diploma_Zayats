@@ -3,15 +3,14 @@ using Newtonsoft.Json;
 
 namespace Diploma_Zayats.Models
 {
-	public class Requirement
-	{ 
+    public class Requirement
+    { 
         [JsonProperty("id")] public int Id { get; set; }
         [JsonProperty("code")] public string Code { get; set; }
         [JsonProperty("name")] public string Name { get; set; }
         [JsonProperty("description")] public string Description { get; set; }
         [JsonProperty("project_id")] public int ProjectId { get; set; }
         [JsonProperty("requirement_type_id")] public int RequirementTypeId { get; set; }
-
 
         protected bool Equals(Requirement other)
         {
