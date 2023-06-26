@@ -1,0 +1,9 @@
+﻿{
+  "id": 6,
+  "name": "New Issue that was created 25 June for check API TEST",
+  "description": "New issue for check that all is OK",
+  "issue_category_id": 2,
+  "issue_status_id": 2,
+  "issue_priority_id": 2,
+  "project_id": 1
+}
