@@ -1,6 +1,6 @@
 ﻿{
   "project_id": 1,
-  "name": "New Issue was created 25 June via API Test",
+  "name": "New Issue was created via API Test",
   "description": "Check that end-point and Test are correct",
   "issue_category_id": 3,
   "issue_status_id": 1,

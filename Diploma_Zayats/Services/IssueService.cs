@@ -11,7 +11,6 @@ namespace Diploma_Zayats.Services
     {
         public static readonly string ADD_ISSUE = "api/v1/issues";
         public static readonly string GET_ISSUE = "api/v1/issues/{issueId}";
-        public static readonly string GET_TASK_FROM_ISSUE = "api/v1/issues/{issueId}/tasks/{taskId}";
 
         public IssueService(ApiClient apiClient) : base(apiClient)
         {
@@ -32,15 +31,6 @@ namespace Diploma_Zayats.Services
 
             return null;
         }
-
-        //public RestResponse AddIssue(Issue issue)
-        //{
-        //    var request = new RestRequest(ADD_ISSUE, Method.Post)
-        //        .AddHeader("Content-Type", "application/json")
-        //        .AddJsonBody(issue);
-
-        //    return _apiClient.Execute(request);
-
 
         public RestResponse AddIssue(int projectId, string name, string description, int issueStatusId, int issuePriorityId, int issueCategoryId)
         {

@@ -2,34 +2,26 @@
 using Diploma_Zayats.Models;
 using Diploma_Zayats.Utilities.Helpers;
 using NLog;
-using RestSharp.Serializers;
 
 namespace Diploma_Zayats.Tests.API
 {
     public class IssueTest : BaseApiTest
     {
         protected Issue expectedIssueForGet = TestDataHelper.GetIssueFromJsonFile("TestData/GetIssue.json");
+        protected Issue expectedIssueForCreate = TestDataHelper.GetTestIssue("CreateIssue.json");
 
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         [Test]
         public void AddIssueTest()
         {
-            int projectId = 1;
-            string name = "Create new Issue via API check";
-            string description = "New issue via API test";
-            int issueStatusId = 2;
-            int issuePriorityId = 3;
-            int issueCategoryId = 2;
-
-            var response = _issueService.AddIssue(projectId, name, description, issueStatusId, issuePriorityId, issueCategoryId);
-            _logger.Info("Actual Issue: " + response);
+            var actualIssue = _issueService.AddIssue(expectedIssueForCreate.ProjectId, expectedIssueForCreate.Name, expectedIssueForCreate.Description, expectedIssueForCreate.IssueStatusId, expectedIssueForCreate.IssuePriorrityId, expectedIssueForCreate.IssueCategoryId);
+            _logger.Info("Actual Added Issue: " + actualIssue);
 
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(201, (int)response.StatusCode);
-                Assert.IsNotNull(response.Content);
-
+                Assert.AreEqual(201, (int)actualIssue.StatusCode);
+                Assert.IsNotNull(actualIssue.Content);
             });
         }
 

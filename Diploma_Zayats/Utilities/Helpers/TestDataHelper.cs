@@ -17,32 +17,13 @@ public class TestDataHelper
         return JsonHelper.FromJson(json).ToObject<Project>();
     }
 
-    //public static Case GetTestCase(string fileName)
-    //{
-    //    var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    //    var json = File.ReadAllText(basePath + Path.DirectorySeparatorChar + "TestData"
-    //                                + Path.DirectorySeparatorChar + fileName);
-
-    //    return JsonHelper.FromJson(json).ToObject<Case>();
-    //}
-
-    //public static Project GetTestProject(string fileName)
-    //{
-    //    var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    //    var json = File.ReadAllText(Path.Combine(basePath, "TestData", fileName));
-
-    //    return JsonSerializer.Deserialize<Project>(json);
-    //}
-
-    //public Issue DeserializeIssueData(string fileName)
-    //{
-    //    var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    //    var filePath = Path.Combine(basePath, "TestData", fileName);
-    //    var json = File.ReadAllText(filePath);
-
-    //    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-    //    return JsonSerializer.Deserialize<Issue>(json, options);
-    //}
+    public static Issue GetTestIssue(string FileName)
+    {
+        var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        var json = File.ReadAllText(basePath + Path.DirectorySeparatorChar + "TestData"
+                                    + Path.DirectorySeparatorChar + FileName);
+        return JsonConvert.DeserializeObject<Issue>(json);
+    }
 
     public static Project GetProjectFromJsonFile(string filePath)
     {
@@ -90,5 +71,26 @@ public class TestDataHelper
         };
 
         return issue;
+    }
+
+    public static Requirement GetRequirementFromJsonFile(string filePath)
+    {
+        if (!File.Exists(filePath))
+            throw new FileNotFoundException($"Could not find file: {filePath}");
+
+        string json = File.ReadAllText(filePath);
+        JObject jsonObject = JObject.Parse(json);
+
+        Requirement requirement = new Requirement
+        {
+            Id = (int)jsonObject["id"],
+            Code = (string)jsonObject["code"],
+            Name = (string)jsonObject["name"],
+            Description = (string)jsonObject["description"],
+            RequirementTypeId = (int)jsonObject["requirement_type_id"],
+            ProjectId = (int)jsonObject["project_id"]
+        };
+
+        return requirement;
     }
 }

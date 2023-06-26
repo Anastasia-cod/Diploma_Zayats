@@ -1,36 +1,16 @@
 using Diploma_Zayats.Models;
 using Diploma_Zayats.Utilities.Helpers;
-using Newtonsoft.Json.Linq;
-using RestSharp;
 using NLog;
-using Diploma_Zayats.Services;
 
 namespace Diploma_Zayats.Tests.API;
 
 public class ProjectTest : BaseApiTest
 {
-    protected Project expectedProjectForCreate = TestDataHelper.GetTestProject("CreateProject.json");
     protected Project expectedProjectForGet = TestDataHelper.GetProjectFromJsonFile("TestData/GetProject.json");
 
     private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-    //Doesn't work
-    //[Test]
-    //public void AddProjectTest()
-    //{
-    //    var actualProject = _projectService.AddProject(expectedProjectForCreate.Name, expectedProjectForCreate.SymbolId);
-
-    //    _logger.Info("Actual Project: " + actualProject);
-
-    //    Assert.Multiple(() =>
-    //    {
-    //        Assert.That(actualProject.Name, Is.EqualTo(expectedProjectForCreate.Name));
-    //        Assert.That(actualProject.SymbolId, Is.EqualTo(expectedProjectForCreate.SymbolId));
-    //        Assert.That(actualProject.Description, Is.EqualTo(expectedProjectForCreate.Description));
-    //    });
-    //}
-
-    [Test]
+    [Test, Order(1)]
     public void GetProjectTest()
     {
         var actualProject = _projectService.GetProject(expectedProjectForGet.Id);
@@ -53,7 +33,7 @@ public class ProjectTest : BaseApiTest
         });
     }
 
-    [Test]
+    [Test, Order(2)]
     public void ArchiveProjectTest()
     {
         var projectForGet = _projectService.GetProject(expectedProjectForGet.Id);

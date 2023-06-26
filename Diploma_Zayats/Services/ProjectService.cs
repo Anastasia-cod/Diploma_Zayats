@@ -11,7 +11,6 @@ public class ProjectService : BaseService
 {
     public static readonly string GET_PPROJECT = "api/v1/projects/{projectId}";
     public static readonly string ARCHIVE_PPROJECT = "api/v1/project/{projectId}/archive";
-    public static readonly string ADD_PPROJECT = "api/v1/projects";
 
     public ProjectService(ApiClient apiClient) : base(apiClient)
     {
@@ -45,21 +44,5 @@ public class ProjectService : BaseService
 
         return response.IsSuccessful;
     }
-
-    //Doesnt't work. Problems with json... maybe TestDataHelper. If I use Postman - all OK
-    //public Project AddProject(string projectName, int symbolId)
-    //{
-
-    //    var request = new RestRequest(ADD_PPROJECT, Method.Post)
-    //        .AddHeader("Content-Type", "application/json")
-    //        .AddHeader("Authorization", "Bearer " + Configurator.Admin.Token)
-    //        .AddJsonBody(new
-    //    {
-    //        name = projectName,
-    //        symbol_id = symbolId
-    //    });
-
-    //    return _apiClient.Execute<Project>(request);
-    //}
 }
 
