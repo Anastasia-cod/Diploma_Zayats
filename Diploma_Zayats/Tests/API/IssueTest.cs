@@ -7,7 +7,7 @@ namespace Diploma_Zayats.Tests.API
 {
     public class IssueTest : BaseApiTest
     {
-        protected Issue expectedIssueForGet = TestDataHelper.GetIssueFromJsonFile("TestData/GetIssue.json");
+        protected Issue expectedIssueForGet = TestDataHelper.GetIssueFromJsonFile("GetIssue.json");
         protected Issue expectedIssueForCreate = TestDataHelper.GetTestIssue("CreateIssue.json");
 
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();

@@ -9,28 +9,27 @@ namespace Diploma_Zayats.Utilities.Helpers;
 
 public class TestDataHelper
 {
-    public static Project GetTestProject(string FileName)
+    public static Project GetTestProject(string fileName)
     {
         var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         var json = File.ReadAllText(basePath + Path.DirectorySeparatorChar + "TestData"
-                                    + Path.DirectorySeparatorChar + FileName);
+                                    + Path.DirectorySeparatorChar + fileName);
         return JsonHelper.FromJson(json).ToObject<Project>();
     }
 
-    public static Issue GetTestIssue(string FileName)
+    public static Issue GetTestIssue(string fileName)
     {
         var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         var json = File.ReadAllText(basePath + Path.DirectorySeparatorChar + "TestData"
-                                    + Path.DirectorySeparatorChar + FileName);
+                                    + Path.DirectorySeparatorChar + fileName);
         return JsonConvert.DeserializeObject<Issue>(json);
     }
 
-    public static Project GetProjectFromJsonFile(string filePath)
+    public static Project GetProjectFromJsonFile(string fileName)
     {
-        if (!File.Exists(filePath))
-            throw new FileNotFoundException($"Could not find file: {filePath}");
-
-        string json = File.ReadAllText(filePath);
+        var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        var json = File.ReadAllText(basePath + Path.DirectorySeparatorChar + "TestData"
+                                    + Path.DirectorySeparatorChar + fileName);
         JObject jsonObject = JObject.Parse(json);
 
         Project project = new Project
@@ -51,12 +50,11 @@ public class TestDataHelper
         return project;
     }
 
-    public static Issue GetIssueFromJsonFile(string filePath)
+    public static Issue GetIssueFromJsonFile(string fileName)
     {
-        if (!File.Exists(filePath))
-            throw new FileNotFoundException($"Could not find file: {filePath}");
-
-        string json = File.ReadAllText(filePath);
+        var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        var json = File.ReadAllText(basePath + Path.DirectorySeparatorChar + "TestData"
+                                    + Path.DirectorySeparatorChar + fileName);
         JObject jsonObject = JObject.Parse(json);
 
         Issue issue = new Issue
@@ -73,12 +71,11 @@ public class TestDataHelper
         return issue;
     }
 
-    public static Requirement GetRequirementFromJsonFile(string filePath)
+    public static Requirement GetRequirementFromJsonFile(string fileName)
     {
-        if (!File.Exists(filePath))
-            throw new FileNotFoundException($"Could not find file: {filePath}");
-
-        string json = File.ReadAllText(filePath);
+        var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        var json = File.ReadAllText(basePath + Path.DirectorySeparatorChar + "TestData"
+                                    + Path.DirectorySeparatorChar + fileName);
         JObject jsonObject = JObject.Parse(json);
 
         Requirement requirement = new Requirement

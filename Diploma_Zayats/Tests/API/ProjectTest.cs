@@ -6,7 +6,7 @@ namespace Diploma_Zayats.Tests.API;
 
 public class ProjectTest : BaseApiTest
 {
-    protected Project expectedProjectForGet = TestDataHelper.GetProjectFromJsonFile("TestData/GetProject.json");
+    protected Project expectedProjectForGet = TestDataHelper.GetProjectFromJsonFile("GetProject.json");
 
     private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
