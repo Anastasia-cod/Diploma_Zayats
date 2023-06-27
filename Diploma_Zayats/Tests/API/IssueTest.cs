@@ -40,7 +40,6 @@ namespace Diploma_Zayats.Tests.API
                 Assert.That(actualIssue.IssueStatusId, Is.EqualTo(expectedIssueForGet.IssueStatusId));
                 Assert.That(actualIssue.IssuePriorrityId, Is.EqualTo(expectedIssueForGet.IssuePriorrityId));
                 Assert.That(actualIssue.IssueCategoryId, Is.EqualTo(expectedIssueForGet.IssueCategoryId));
-
             });
         }
 
