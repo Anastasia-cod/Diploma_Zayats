@@ -1,6 +1,8 @@
+using Allure.Commons;
 using Diploma_Zayats.Models;
 using Diploma_Zayats.Utilities.Helpers;
 using NLog;
+using NUnit.Allure.Attributes;
 
 namespace Diploma_Zayats.Tests.API;
 
@@ -11,7 +13,16 @@ public class ProjectTest : BaseApiTest
     private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
     [Test, Order(1)]
-    public void GetProjectTest()
+    [AllureSeverity(SeverityLevel.blocker)]
+    [AllureOwner("User")]
+    [AllureSuite("API Suite")]
+    [AllureSubSuite("Smoke test - Project")]
+    [AllureIssue("Issue - smoke test: get project by projectID. GET HTTP-request")]
+    [AllureTms("Project - P1")]
+    [AllureTag("Smoke")]
+    [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
+    [Description("Verifying that project by projectId was retrieved successfully")]
+    public void P1_GetProjectTest()
     {
         var actualProject = _projectService.GetProject(expectedProjectForGet.Id);
 
@@ -34,7 +45,16 @@ public class ProjectTest : BaseApiTest
     }
 
     [Test, Order(2)]
-    public void ArchiveProjectTest()
+    [AllureSeverity(SeverityLevel.blocker)]
+    [AllureOwner("User")]
+    [AllureSuite("API Suite")]
+    [AllureSubSuite("Smoke test - Project")]
+    [AllureIssue("Issue - smoke test: archive project by projectID. POST HTTP-request")]
+    [AllureTms("Project - P2")]
+    [AllureTag("Smoke")]
+    [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
+    [Description("Verifying that project by projectId was archived successfully")]
+    public void P2_ArchiveProjectTest()
     {
         var projectForGet = _projectService.GetProject(expectedProjectForGet.Id);
 
@@ -50,8 +70,7 @@ public class ProjectTest : BaseApiTest
         {
             Assert.IsNotNull(archivedProject.DeletedAt);
             Assert.That(archivedProject.Id, Is.EqualTo(expectedProjectForGet.Id));
-        });
-        
+        });       
     }
 }
 

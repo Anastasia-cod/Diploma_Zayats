@@ -1,8 +1,10 @@
 ﻿using System;
+using Allure.Commons;
 using Diploma_Zayats.Models;
 using Diploma_Zayats.Services;
 using Diploma_Zayats.Utilities.Helpers;
 using NLog;
+using NUnit.Allure.Attributes;
 
 namespace Diploma_Zayats.Tests.API
 {
@@ -13,7 +15,16 @@ namespace Diploma_Zayats.Tests.API
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         [Test]
-        public void GetRequirementTest()
+        [AllureSeverity(SeverityLevel.blocker)]
+        [AllureOwner("User")]
+        [AllureSuite("API Suite")]
+        [AllureSubSuite("Smoke test - Requirement")]
+        [AllureIssue("Issue - smoke test: get requirement by requirementID. GET HTTP-request")]
+        [AllureTms("Requirement - R1")]
+        [AllureTag("Smoke")]
+        [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
+        [Description("Verifying that requirement was retrieved successfully")]
+        public void R1_GetRequirementTest()
         {
             var actualRequirement = _requirementService.GetRequirement(expectedRequirementForGet.Id);
 

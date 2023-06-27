@@ -1,8 +1,12 @@
+using Allure.Commons;
 using Diploma_Zayats.Client;
 using Diploma_Zayats.Services;
+using NUnit.Allure.Core;
+using NUnit.Framework.Interfaces;
 
 namespace Diploma_Zayats.Tests.API;
 
+[AllureNUnit]
 public class BaseApiTest
 {
     protected ApiClient _apiClient;
