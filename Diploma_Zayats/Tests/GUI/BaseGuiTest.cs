@@ -11,7 +11,7 @@ namespace Diploma_Zayats.Tests.GUI
 {
     [AllureNUnit]
     public class BaseGuiTest
-	{
+    {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         public static readonly string? BaseUrl = Configurator.AppSettings.URL;
 

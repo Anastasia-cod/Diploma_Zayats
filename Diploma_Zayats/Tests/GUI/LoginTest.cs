@@ -15,11 +15,11 @@ namespace Diploma_Zayats.Tests.GUI
         [AllureSuite("GUI_Suite")]
         [AllureSubSuite("Login")]
         [AllureIssue("Issue - Login with valid credentials")]
-        [AllureTms("Login - 1.1")]
+        [AllureTms("Login - L1")]
         [AllureTag("Smoke")]
         [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
         [Description("Verifying that standart user with valid credentials can login")]
-        public void SuccessfullLogin_StandartUser()
+        public void L1_SuccessfullLogin_StandartUser()
         {
             UserBuilder builder = new UserBuilder();
 
@@ -41,11 +41,11 @@ namespace Diploma_Zayats.Tests.GUI
         [AllureSuite("GUI_Suite")]
         [AllureSubSuite("Login")]
         [AllureIssue("Issue - Login with invalid credentials")]
-        [AllureTms("Login - 1.2")]
+        [AllureTms("Login - L2")]
         [AllureTag("Smoke")]
         [AllureLink("https://www.saucedemo.com/")]
         [Description("Verifying that standart user with invalid password can not login. Error is appeared")]
-        public void IncorrectLogin_UserWithIncorrectPassword()
+        public void L2_IncorrectLogin_UserWithIncorrectPassword()
         {
             UserBuilder builder = new UserBuilder();
 
