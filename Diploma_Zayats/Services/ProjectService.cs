@@ -11,6 +11,7 @@ public class ProjectService : BaseService
 {
     public static readonly string GET_PPROJECT = "api/v1/projects/{projectId}";
     public static readonly string ARCHIVE_PPROJECT = "api/v1/project/{projectId}/archive";
+    public static readonly string UNARCHIVE_PPROJECT = "api/v1/project/{projectId}/unarchive";
 
     public ProjectService(ApiClient apiClient) : base(apiClient)
     {
