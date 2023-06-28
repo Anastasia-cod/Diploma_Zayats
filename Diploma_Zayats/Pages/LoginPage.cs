@@ -17,6 +17,7 @@ namespace Diploma_Zayats.Pages
         public LoginPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
         }
+
         public LoginPage(IWebDriver driver) : base(driver, false)
         {
         }

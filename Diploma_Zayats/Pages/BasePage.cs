@@ -10,8 +10,6 @@ namespace Diploma_Zayats.Pages
         protected IWebDriver Driver;
         protected WaitService WaitService;
 
-        By ShoppingCartLinkBy = By.ClassName("support-widget-button");
-
         public abstract void OpenPage();
         public abstract bool IsPageOpened();
 

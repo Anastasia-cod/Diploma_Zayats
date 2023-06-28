@@ -8,7 +8,7 @@ namespace Diploma_Zayats.Pages
     {
         private static string END_POINT = "my-projects";
 
-        By ManageProjectByttonBy = By.ClassName("button");
+        By ManageProjectButtonBy = By.ClassName("button");
 
         public MyProjectsPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
@@ -27,7 +27,7 @@ namespace Diploma_Zayats.Pages
         {
             try
             {
-                return Driver.FindElement(ManageProjectByttonBy).Displayed;
+                return Driver.FindElement(ManageProjectButtonBy).Displayed;
             }
             catch (Exception e)
             {
@@ -35,16 +35,16 @@ namespace Diploma_Zayats.Pages
             }
         }
 
-        public SettingsPage ManageProject()
+        public SettingsProjectsPage ManageProject()
         {
-            Driver.FindElement(ManageProjectByttonBy).Click();
+            Driver.FindElement(ManageProjectButtonBy).Click();
 
-            return new SettingsPage();
+            return new SettingsProjectsPage(Driver, true);
         }
 
         public bool CheckManageProjectButtonIsDisplayed()
         {
-            return Driver.FindElement(ManageProjectByttonBy).Displayed;
+            return Driver.FindElement(ManageProjectButtonBy).Displayed;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Allure.Commons;
 using Diploma_Zayats.Core;
+using Diploma_Zayats.Models;
 using Diploma_Zayats.Pages;
 using Diploma_Zayats.Utilities.Configuration;
 using NLog;
@@ -16,7 +17,7 @@ namespace Diploma_Zayats.Tests.GUI
         public static readonly string? BaseUrl = Configurator.AppSettings.URL;
 
         protected static IWebDriver? Driver;
-        protected WaitService? WaitService;
+        //protected WaitService? WaitService;
 
         private AllureLifecycle _allure;
 
@@ -33,7 +34,7 @@ namespace Diploma_Zayats.Tests.GUI
             _logger.Fatal("Message level Fatal");
 
             Driver = new Browser().Driver;
-            WaitService = new WaitService(Driver);
+            //WaitService = new WaitService(Driver);
 
             LoginPage = new LoginPage(Driver);
             LoginPage.OpenPage();
