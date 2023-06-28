@@ -11,7 +11,8 @@ namespace Diploma_Zayats.Pages
         private static string END_POINT = "settings/archived/projects";
 
         By BackToProjectsButtonBy = By.XPath("//div[@class='level-item mr-4']");
-        By LastPageInPaginationElementBy = By.XPath("(//li/a[@role='button'])[last()]");
+        By ItemForDisplayedOnThePageElementBy = By.XPath("//span[@class='select']/select");
+        By Page100ForDisplayedOnThePageElementBy = By.XPath("//option[@value='100']");
         By LastArchivedProjectElementBy = By.XPath("(//td[@data-label='Project']/div)[last()]");
 
 
@@ -42,23 +43,10 @@ namespace Diploma_Zayats.Pages
 
         public string GetLastArchivedProjectTitle()
         {
-            GoToLastPageInPagination();
+            ItemForDisplayedOnThePageClick();
+            Page100DisplayedOnThePageClick();
 
             return GetArchivedProjectTitle();
-        }
-
-        private void GoToLastPageInPagination()
-        {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
-            try
-            {
-                var lastPageElement = wait.Until(ExpectedConditions.ElementExists(LastPageInPaginationElementBy));
-                lastPageElement.Click();
-            }
-            catch (NoSuchElementException)
-            {
-            }
         }
 
         public string GetArchivedProjectTitle()
@@ -71,8 +59,30 @@ namespace Diploma_Zayats.Pages
             }
             catch (NoSuchElementException)
             {
-                return null;
+                throw new ApplicationException("Last archived project element not found");
             }
+        }
+
+        public void ItemForDisplayedOnThePageClick()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            try
+            {
+                var lastPageElement = wait.Until(ExpectedConditions.ElementExists(ItemForDisplayedOnThePageElementBy));
+                lastPageElement.Click();
+            }
+            catch (NoSuchElementException)
+            {
+                throw new ApplicationException("Last page element not found");
+            }
+        }
+
+        public ArchivedProjectPage Page100DisplayedOnThePageClick()
+        {
+            Driver.FindElement(Page100ForDisplayedOnThePageElementBy).Click();
+
+            return this;
         }
     }
 }

@@ -125,7 +125,7 @@ namespace Diploma_Zayats.Pages
             }
             catch (NoSuchElementException)
             {
-                return null;
+                throw new ApplicationException("Last added project element not found");
             }
         }
 

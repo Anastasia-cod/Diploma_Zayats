@@ -4,9 +4,12 @@ using Diploma_Zayats.Models;
 using Diploma_Zayats.Pages;
 using Diploma_Zayats.Utilities.Configuration;
 using NUnit.Allure.Attributes;
+using NUnit.Allure.Core;
+using OpenQA.Selenium;
 
 namespace Diploma_Zayats.Tests.GUI
 {
+    [TestFixture]
     public class ProjectTest : BaseGuiTest
     {
         private UserBuilder _userBuilder;
@@ -45,7 +48,6 @@ namespace Diploma_Zayats.Tests.GUI
                 .SetProjectName(projectName);
 
             Assert.IsTrue(settingsProjectsPage.CheckThatPossibleClickFeatureButton());
-
         }
 
         [Test, Order(1)]
@@ -60,7 +62,7 @@ namespace Diploma_Zayats.Tests.GUI
         [Description("Verifying that standart user with valid credentials can login")]
         public void P2_CreateNewProjectTest()
         {
-            var projectName = "New Project GUI test 3";
+            var projectName = "New Project GUI test 4";
 
             ProjectBuilder builder = new ProjectBuilder();
 
@@ -69,7 +71,7 @@ namespace Diploma_Zayats.Tests.GUI
                 .SetProjectDescriprion("Create new Project via GUI test - check that all is ok")
                 .Build();
 
-            var settingsProjectsPage = new SettingsProjectsPage(Driver)
+            var settingsProjectsPage = new SettingsProjectsPage(Driver, true)
                 .CreateProject(newProject);
 
             Assert.That(settingsProjectsPage.GetLastAddedProjectTitle, Is.EqualTo(projectName));
@@ -87,18 +89,16 @@ namespace Diploma_Zayats.Tests.GUI
         [Description("Verifying that it's possible to archive the added project")]
         public void P3_ArchiveAddedProjectTest()
         {
-            //var lasdAddedTitle = new SettingsProjectsPage(Driver, true)
-            //    .GetLastAddedProjectTitle();
+            var lasdAddedTitle = new SettingsProjectsPage(Driver, true)
+                .GetLastAddedProjectTitle();
 
-            //new SpecificProjectPage(Driver, true)
-            //    .ArchiveSpecificProject();
+            new SpecificProjectPage(Driver, true)
+                .ArchiveSpecificProject();
 
-            var archivedProjectTitle = new ArchivedProjectPage(Driver)
+            var archivedProjectTitle = new ArchivedProjectPage(Driver, true)
                 .GetLastArchivedProjectTitle();
 
-            //Assert.That(lasdAddedTitle, Is.EqualTo(archivedProjectTitle));
-            Assert.That(archivedProjectTitle, Is.EqualTo("New Project GUI test 3"));
-
+            Assert.That(archivedProjectTitle, Is.EqualTo(lasdAddedTitle));
         }
     }
 }

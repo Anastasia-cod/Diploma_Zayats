@@ -17,7 +17,7 @@ namespace Diploma_Zayats.Tests.GUI
         public static readonly string? BaseUrl = Configurator.AppSettings.URL;
 
         protected static IWebDriver? Driver;
-        //protected WaitService? WaitService;
+        protected WaitService? WaitService;
 
         private AllureLifecycle _allure;
 
@@ -34,7 +34,7 @@ namespace Diploma_Zayats.Tests.GUI
             _logger.Fatal("Message level Fatal");
 
             Driver = new Browser().Driver;
-            //WaitService = new WaitService(Driver);
+            WaitService = new WaitService(Driver);
 
             LoginPage = new LoginPage(Driver);
             LoginPage.OpenPage();

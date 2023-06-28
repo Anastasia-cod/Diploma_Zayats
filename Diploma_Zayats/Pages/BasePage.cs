@@ -4,8 +4,8 @@ using OpenQA.Selenium;
 
 namespace Diploma_Zayats.Pages
 {
-	public abstract class BasePage
-	{
+    public abstract class BasePage
+    {
         protected static int waitForPageLoadingTime = 60;
         protected IWebDriver Driver;
         protected WaitService WaitService;

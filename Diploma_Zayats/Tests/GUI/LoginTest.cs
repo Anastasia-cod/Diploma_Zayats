@@ -4,9 +4,11 @@ using Diploma_Zayats.Models;
 using Diploma_Zayats.Pages;
 using Diploma_Zayats.Utilities.Configuration;
 using NUnit.Allure.Attributes;
+using NUnit.Allure.Core;
 
 namespace Diploma_Zayats.Tests.GUI
 {
+    [TestFixture]
     public class LoginTest : BaseGuiTest
     {
         [Test, Order(1)]

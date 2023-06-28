@@ -7,7 +7,7 @@ namespace Diploma_Zayats.Pages
 {
     public class SpecificProjectPage : BasePage
     {
-        private static string END_POINT = "settings/projects/56";
+        private static string END_POINT = "settings/projects/59";
 
         By SettingsButtonBy = By.XPath("(//button[@class='button is-white'])[2]");
         By ArchiveElementBy = By.XPath("(//a[@class='dropdown-item'])[3]");
