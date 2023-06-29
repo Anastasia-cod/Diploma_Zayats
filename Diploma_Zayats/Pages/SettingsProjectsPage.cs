@@ -73,7 +73,7 @@ namespace Diploma_Zayats.Pages
         {
             ClickFeaturesButton();
 
-            return Driver.FindElement(TemplateButtonBy).Displayed;
+            return Driver.FindElement(TemplateButtonBy).Enabled;
         }
 
         public SettingsProjectsPage CreateProject(Project project)
@@ -97,6 +97,11 @@ namespace Diploma_Zayats.Pages
 
         public SettingsProjectsPage SetProjectName(string name)
         {
+            if (name == null)
+            {
+                name = string.Empty;
+            }
+
             Driver.FindElement(NameProjectInputBy).SendKeys(name);
 
             return this;

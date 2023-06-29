@@ -29,18 +29,21 @@ namespace Diploma_Zayats.Tests.GUI
                 .SuccessfulLogin(_standartUser);
         }
 
-        [TestCase("P")]
-        [TestCase("New project that contains 99 characters for check that it's ok and the Features button will be clickable after filling")]
-        [TestCase("New project that contains 100 characters for check that it's ok and the Features button will be clickable after filling")]
+        [TestCase("1")]
+        [TestCase("New project that contains 99 characters including spaces check theFeatures button will be clickable")]
+        [TestCase("New project that contains 100 characters including spaces check theFeatures button will be clickable")]
+        [TestCase("New project that contains 101 characters for check that it's ok and the Features button will be click")]
+        [TestCase("New project that contains 505 characters for check that it's ok and the Features button will be clickable after filling Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus erat nec lorem consectetur, non placerat lectus vestibulum. Sed hendrerit lobortis faucibus. Sed lacinia turpis vitae lacinia condimentum. Ut a scelerisque elit. Fusce eget magna auctor, rutrum metus ut, fringilla dui. Duis aliquet porttitor magna. Ut massa lectus, iaculis nec bibendum tempus, malesuada ac velit.")]
+        [TestCase("New project that contains 1001 characters for check that it's ok and the Features button will be clickable after filling Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus erat nec lorem consectetur, non placerat lectus vestibulum. Sed hendrerit lobortis faucibus. Sed lacinia turpis vitae lacinia condimentum. Ut a scelerisque elit. Fusce eget magna auctor, rutrum metus ut, fringilla dui. Duis aliquet porttitor magna. Ut massa lectus, iaculis nec bibendum tempus, malesuada ac velit. Sed a vestibulum nisl. Donec luctus nisl ut turpis pretium egestas. Vivamus auctor elit in lacus vulputate cursus. Sed enim arcu, ultricies ut placerat vel, tincidunt congue ipsum. Suspendisse vitae porttitor ante, eu dapibus ante. Praesent suscipit felis a feugiat pharetra. Sed a finibus leo. Suspendisse elementum mauris eu nisl vehicula suscipit. Fusce vitae diam ac elit ullamcorper porta eget ac sapien. In feugiat risus ut erat lobortis, at eleifend tortor congue. Donec sit amet molesti")]
         [AllureSeverity(SeverityLevel.blocker)]
         [AllureOwner("User")]
         [AllureSuite("GUI_Suite")]
         [AllureSubSuite("Project")]
-        [AllureIssue("Issue - check limit values in Name field when creating new project")]
+        [AllureIssue("Issue - limit values in Name field [1-100] when creating new project")]
         [AllureTms("Project - P1")]
         [AllureTag("Smoke")]
         [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
-        [Description("Verifying that field Name can contains [1-100] characters when creating new project")]
+        [Description("Verifying that field Name can contains [1-100] characters when creating new project and if user insert more than 100 characters [101 - +infinity] - the characters >100 will be cutt of")]
         public void P1_LimitValuesProjectNameInputTest(string projectName)
         {
             var settingsProjectsPage = new SettingsProjectsPage(Driver, true)
@@ -48,6 +51,25 @@ namespace Diploma_Zayats.Tests.GUI
                 .SetProjectName(projectName);
 
             Assert.IsTrue(settingsProjectsPage.CheckThatPossibleClickFeatureButton());
+        }
+
+        [TestCase(null)]
+        [AllureSeverity(SeverityLevel.blocker)]
+        [AllureOwner("User")]
+        [AllureSuite("GUI_Suite")]
+        [AllureSubSuite("Project")]
+        [AllureIssue("Issue - empty required 'Name' field when creating new project")]
+        [AllureTms("Project - P1A")]
+        [AllureTag("Smoke")]
+        [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
+        [Description("Verifying that when required 'Name' field is empty, it’s not possible to create new project - the ‘Feature’ button is disabled")]
+        public void P1A_EmptyRequiredProjectNameInputTest(string projectName)
+        {
+            var settingsProjectsPage = new SettingsProjectsPage(Driver, true)
+                .ClickCreateProjectButton()
+                .SetProjectName(projectName);
+
+            Assert.IsFalse(settingsProjectsPage.CheckThatPossibleClickFeatureButton());
         }
 
         [Test, Order(1)]
@@ -59,7 +81,7 @@ namespace Diploma_Zayats.Tests.GUI
         [AllureTms("Project - P2")]
         [AllureTag("Smoke")]
         [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
-        [Description("Verifying that standart user with valid credentials can login")]
+        [Description("Verifying that it's possible to create project with fill in all required data and verify that alert  about project was created is displayed")]
         public void P2_CreateNewProjectTest()
         {
             var projectName = "New Project GUI test 4";
