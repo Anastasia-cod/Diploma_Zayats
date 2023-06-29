@@ -33,7 +33,6 @@ namespace Diploma_Zayats.Tests.GUI
             var myProjectsPage = new LoginPage(Driver, true)
                 .SuccessfulLogin(standartUser);
 
-            //Assert
             Assert.That(myProjectsPage.CheckManageProjectButtonIsDisplayed, Is.True);
         }
 
@@ -61,7 +60,6 @@ namespace Diploma_Zayats.Tests.GUI
 
             var expectedError = "These credentials do not match our records.";
 
-            //Assert
             Assert.Multiple(() =>
             {
                 Assert.That(loginPage.ErrorMessageIsDisplayed, Is.True);

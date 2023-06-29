@@ -74,7 +74,11 @@ namespace Diploma_Zayats.Tests.GUI
             var settingsProjectsPage = new SettingsProjectsPage(Driver, true)
                 .CreateProject(newProject);
 
-            Assert.That(settingsProjectsPage.GetLastAddedProjectTitle, Is.EqualTo(projectName));
+            Assert.Multiple(() =>
+            {
+                Assert.That(settingsProjectsPage.IsSuccessAlertDisplayed, Is.True);
+                Assert.That(settingsProjectsPage.GetLastAddedProjectTitle, Is.EqualTo(projectName)); ;
+            });            
         }
 
         [Test, Order(2)]
@@ -99,6 +103,30 @@ namespace Diploma_Zayats.Tests.GUI
                 .GetLastArchivedProjectTitle();
 
             Assert.That(archivedProjectTitle, Is.EqualTo(lasdAddedTitle));
+        }
+
+        [Test, Order(3)]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureOwner("User")]
+        [AllureSuite("GUI_Suite")]
+        [AllureSubSuite("Project")]
+        [AllureIssue("Issue - cancel archive a project")]
+        [AllureTms("Project - P4")]
+        [AllureTag("Smoke")]
+        [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
+        [Description("Verifying that it's possible to cancel archive a project, but the test Failed because firstAddedProjectTitle is not match the lastArchivedProjectTitle. Test for check that in case of test failed - the allure take a screenshot.")]
+        public void P4_FailedTest_CancelArchiveAddedProjectTest()
+        {
+            var firstAddedTitle = new SettingsProjectsPage(Driver, true)
+                .GetFirstAddedProjectTitle();
+
+            new SpecificProjectPage(Driver, true)
+                .CancelArchiveSpecificProject();
+
+            var archivedProjectTitle = new ArchivedProjectPage(Driver, true)
+                .GetLastArchivedProjectTitle();
+
+            Assert.That(archivedProjectTitle, Is.EqualTo(firstAddedTitle));
         }
     }
 }

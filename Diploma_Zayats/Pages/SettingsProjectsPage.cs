@@ -21,6 +21,8 @@ namespace Diploma_Zayats.Pages
         By TemplateButtonBy = By.XPath("//div[@class='level-item']/button[@class='button is-primary']");
         By CreateButtonBy = By.XPath("//div[@class='level-item']/button[@class='button is-primary']");
         By LastAddedProjectElementBy = By.XPath("(//div[@class='media-content']/h3)[4]");
+        By FirstAddedProjectElementBy = By.XPath("(//div[@class='media-content']/h3)[1]");
+        By SuccessAlertElementBy = By.XPath("//div[@role='alert']");
 
 
         public SettingsProjectsPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
@@ -43,6 +45,20 @@ namespace Diploma_Zayats.Pages
                 return Driver.FindElement(CreateProjectButtonBy).Displayed;
             }
             catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool IsSuccessAlertDisplayed()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            try
+            {
+                return wait.Until(ExpectedConditions.ElementExists(SuccessAlertElementBy)).Displayed;
+            }
+            catch (Exception)
             {
                 return false;
             }
@@ -114,6 +130,21 @@ namespace Diploma_Zayats.Pages
             return this;
         }
 
+        public string GetFirstAddedProjectTitle()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            try
+            {
+                return wait.Until(ExpectedConditions.ElementExists(FirstAddedProjectElementBy)).Text;
+
+            }
+            catch (NoSuchElementException)
+            {
+                throw new ApplicationException("Last added project element not found");
+            }
+        }
+
         public string GetLastAddedProjectTitle()
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
@@ -129,13 +160,30 @@ namespace Diploma_Zayats.Pages
             }
         }
 
-        public SpecificProjectPage GoToSpecificPage_ClickByProjectTitle()
+        public SpecificProjectPage GoToSpecificPage_ClickByLastAddedProjectTitle()
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
 
             try
             {
                 IWebElement element = wait.Until(ExpectedConditions.ElementExists(LastAddedProjectElementBy));
+                element.Click();
+
+                return new SpecificProjectPage(Driver, true);
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
+        }
+
+        public SpecificProjectPage GoToSpecificPage_ClickByFirstAddedProjectTitle()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            try
+            {
+                IWebElement element = wait.Until(ExpectedConditions.ElementExists(FirstAddedProjectElementBy));
                 element.Click();
 
                 return new SpecificProjectPage(Driver, true);

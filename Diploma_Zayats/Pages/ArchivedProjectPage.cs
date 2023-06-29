@@ -15,7 +15,6 @@ namespace Diploma_Zayats.Pages
         By Page100ForDisplayedOnThePageElementBy = By.XPath("//option[@value='100']");
         By LastArchivedProjectElementBy = By.XPath("(//td[@data-label='Project']/div)[last()]");
 
-
         public ArchivedProjectPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
         }
