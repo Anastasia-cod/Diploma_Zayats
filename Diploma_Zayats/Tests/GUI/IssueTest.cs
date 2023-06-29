@@ -52,6 +52,30 @@ namespace Diploma_Zayats.Tests.GUI
                 Assert.IsTrue(issuePage.CheckCancelButtonIsDisplayed());
             });           
         }
+
+        [Test, Order(2)]
+        [AllureSeverity(SeverityLevel.blocker)]
+        [AllureOwner("User")]
+        [AllureSuite("GUI_Suite")]
+        [AllureSubSuite("Issue")]
+        [AllureIssue("Issue - add attachment to an issue")]
+        [AllureTms("Issue - I2")]
+        [AllureTag("Smoke")]
+        [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
+        [Description("Verifying that it's possible to add attachment to the issue")]
+        public void I2_AddAttachmentToTheIssueTest()
+        {
+            var issuesPage = new IssuesPageOfFirstAddedProject(Driver, true)
+                .GoToFirstIssue()
+                .ClickAttachments();
+
+            string filePath = "/Users/admin/Desktop/attachment.jpeg";
+            issuesPage.UploadFile(filePath);
+
+            string attachedFileName = issuesPage.GetAttachedFileName();
+
+            Assert.AreEqual("attachment.jpeg", attachedFileName);
+        }
     }
 }
 

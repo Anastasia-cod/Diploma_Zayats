@@ -17,6 +17,10 @@ namespace Diploma_Zayats.Pages
         By DescriptionInputBy = By.XPath("//p[@class='is-empty is-editor-empty']");
         By AddButtonBy = By.XPath("//button[@class='button is-success']");
         By CancelButtonBy = By.XPath("//div[@class='buttons is-right is-fullwidth']/button[@class='button is-white']");
+        By GoToFirstIssueElementBy = By.ClassName("has-overflow-wrap");
+        By AttachmentsElementBy = By.Id("dropzone-245");
+        By FileInputBy = By.XPath("//input[@type='file']");
+        By AttachedFileBy = By.XPath("//div[@class='column attachment is-narrow has-text-centered']/p");
 
         public IssuesPageOfFirstAddedProject(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
@@ -98,7 +102,41 @@ namespace Diploma_Zayats.Pages
             return Driver.FindElement(CancelButtonBy).Displayed;
         }
 
+        public IssuesPageOfFirstAddedProject GoToFirstIssue()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(GoToFirstIssueElementBy)).Click();
+
+            return this;
+        }
+
+        public IssuesPageOfFirstAddedProject ClickAttachments()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(AttachmentsElementBy)).Click();
+
+            return this;
+        }
+
+        public IssuesPageOfFirstAddedProject UploadFile(string filePath)
+        {
+            Driver.FindElement(FileInputBy).SendKeys(filePath);
+
+            return this;
+        }
+
+        public string GetAttachedFileName()
+        {
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            IWebElement attachedFileElement = wait.Until(ExpectedConditions.ElementIsVisible(AttachedFileBy));
+
+            return attachedFileElement.Text;
+        }
     }
 }
+
 
 
