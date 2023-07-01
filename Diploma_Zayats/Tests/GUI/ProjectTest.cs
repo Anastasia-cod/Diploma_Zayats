@@ -84,7 +84,7 @@ namespace Diploma_Zayats.Tests.GUI
         [Description("Verifying that it's possible to create project with fill in all required data and verify that alert  about project was created is displayed")]
         public void P2_CreateNewProjectTest()
         {
-            var projectName = "New Project GUI test 7";
+            var projectName = "New Project GUI test 8";
 
             ProjectBuilder builder = new ProjectBuilder();
 
