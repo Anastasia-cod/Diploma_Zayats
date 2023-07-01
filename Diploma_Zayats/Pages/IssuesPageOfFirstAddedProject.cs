@@ -163,21 +163,6 @@ namespace Diploma_Zayats.Pages
 
             return this;
         }
-
-        public bool IsAttachmentPresent()
-        {
-            try
-            {
-                WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(AttachedFileBy));
-
-                return false;
-            }
-            catch (NoSuchElementException)
-            {
-                return true;
-            }
-        }
     }
 }
 

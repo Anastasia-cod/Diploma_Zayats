@@ -44,7 +44,6 @@ public class TestDataHelper
             UsesRequirements = (bool)jsonObject["uses_requirements"],
             Completed = (bool)jsonObject["completed"],
             DeletedAt = jsonObject["deleted_at"]?.ToObject<DateTime?>()
-
         };
 
         return project;
