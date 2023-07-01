@@ -25,4 +25,4 @@ API TESTS:
 | POST         | https://mydomain.testmonitor.com/api/v1/project/{projectId}/archive | Archive a project                          | P2     | Project     | Verify that project was archived |
 | GET          | https://mydomain.testmonitor.com/api/v1/issues/{issueId}            | Retrieve a single issue                    | I1     | Issue       | Verify that issue was retrieved successfully|               
 | POST         | https://mydomain.testmonitor.com/api/v1/issues                      | Create an issue                            | I2     | Issue       | Verify that issue was created    
-| GET          | https://mydomain.testmonitor.com/api/v1/requirements/{requirementId}| Retrieve a requirement using its identifier| R1     | Requirement | Verify that requirement was retrieved successfully|
+| GET          | https://mydomain.testmonitor.com/api/v1/requirements/{requirementId}| Retrieve a requirement using invalid identifier| R1     | Requirement | Verify that requirement wasn't retrieved successfully|
