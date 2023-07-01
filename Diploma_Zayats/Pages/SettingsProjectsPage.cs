@@ -23,7 +23,6 @@ namespace Diploma_Zayats.Pages
         By FirstAddedProjectElementBy = By.XPath("(//div[@class='media-content']/h3)[1]");
         By SuccessAlertElementBy = By.XPath("//div[@role='alert']");
 
-
         public SettingsProjectsPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
         }
