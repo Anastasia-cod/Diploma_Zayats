@@ -16,11 +16,10 @@ namespace Diploma_Zayats.Pages
         By CreateProjectButtonBy = By.XPath("//div[@class='modal-wizard']/button");
         By NameProjectInputBy = By.XPath("//div[@class='control is-clearfix']/input");
         By DescriptionProjectInputBy = By.XPath("//div[@class='control']/textarea");
-        By CancelButtonBy = By.XPath("//div[@class='level-item']/button[@class='button is-white']");
         By FeaturesButtonBy = By.XPath("//div[@class='level-item']/button[@class='button is-primary']");
         By TemplateButtonBy = By.XPath("//div[@class='level-item']/button[@class='button is-primary']");
         By CreateButtonBy = By.XPath("//div[@class='level-item']/button[@class='button is-primary']");
-        By LastAddedProjectElementBy = By.XPath("(//div[@class='media-content']/h3)[4]");
+        By LastAddedProjectElementBy = By.XPath("(//h3[@class='title is-4'])[last()]");
         By FirstAddedProjectElementBy = By.XPath("(//div[@class='media-content']/h3)[1]");
         By SuccessAlertElementBy = By.XPath("//div[@role='alert']");
 
@@ -56,7 +55,7 @@ namespace Diploma_Zayats.Pages
 
             try
             {
-                return wait.Until(ExpectedConditions.ElementExists(SuccessAlertElementBy)).Displayed;
+                return wait.Until(ExpectedConditions.ElementIsVisible(SuccessAlertElementBy)).Displayed;
             }
             catch (Exception)
             {
@@ -146,7 +145,7 @@ namespace Diploma_Zayats.Pages
             }
             catch (NoSuchElementException)
             {
-                throw new ApplicationException("Last added project element not found");
+                throw new ApplicationException("First added project element not found");
             }
         }
 

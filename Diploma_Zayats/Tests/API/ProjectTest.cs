@@ -70,7 +70,7 @@ public class ProjectTest : BaseApiTest
         {
             Assert.IsNotNull(archivedProject.DeletedAt);
             Assert.That(archivedProject.Id, Is.EqualTo(expectedProjectForGet.Id));
-        });       
+        });
     }
 }
 

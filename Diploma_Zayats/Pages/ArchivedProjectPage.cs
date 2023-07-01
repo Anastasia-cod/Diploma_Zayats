@@ -54,7 +54,8 @@ namespace Diploma_Zayats.Pages
 
             try
             {
-                return wait.Until(ExpectedConditions.ElementExists(LastArchivedProjectElementBy)).Text;
+                var lastArchivedProjectElement = wait.Until(ExpectedConditions.ElementIsVisible(LastArchivedProjectElementBy));
+                return lastArchivedProjectElement.Text;
             }
             catch (NoSuchElementException)
             {

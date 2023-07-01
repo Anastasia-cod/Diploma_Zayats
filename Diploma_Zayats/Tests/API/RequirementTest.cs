@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Net;
 using Allure.Commons;
+using Diploma_Zayats.Client;
 using Diploma_Zayats.Models;
 using Diploma_Zayats.Services;
+using Diploma_Zayats.Utilities.Configuration;
 using Diploma_Zayats.Utilities.Helpers;
 using NLog;
 using NUnit.Allure.Attributes;
+using RestSharp;
+using RestSharp.Authenticators;
 
 namespace Diploma_Zayats.Tests.API
 {
@@ -19,27 +24,20 @@ namespace Diploma_Zayats.Tests.API
         [AllureOwner("User")]
         [AllureSuite("API Suite")]
         [AllureSubSuite("Smoke test - Requirement")]
-        [AllureIssue("Issue - smoke test: get requirement by requirementID. GET HTTP-request")]
+        [AllureIssue("Issue - smoke test: get requirement by invalid requirementID. GET HTTP-request")]
         [AllureTms("Requirement - R1")]
         [AllureTag("Smoke")]
         [AllureLink("https://qa_anastasiya_zayats.testmonitor.com/")]
-        [Description("Verifying that requirement was retrieved successfully")]
-        public void R1_GetRequirementTest()
+        [Description("Verifying that requirement with invalid requirementId wasn't retrieved successfully.")]
+        public void R1_GetNotFoundRequirementByInvalidIdTest()
         {
             var actualRequirement = _requirementService.GetRequirement(expectedRequirementForGet.Id);
 
             _logger.Info("Actual Requirement: " + actualRequirement);
             _logger.Info("Expected Requirement: " + expectedRequirementForGet);
 
-            Assert.Multiple(() =>
-            {
-                Assert.That(actualRequirement.Id, Is.EqualTo(expectedRequirementForGet.Id));
-                Assert.That(actualRequirement.ProjectId, Is.EqualTo(expectedRequirementForGet.ProjectId));
-                Assert.That(actualRequirement.Name, Is.EqualTo(expectedRequirementForGet.Name));
-                Assert.That(actualRequirement.Description, Is.EqualTo(expectedRequirementForGet.Description));
-                Assert.That(actualRequirement.RequirementTypeId, Is.EqualTo(expectedRequirementForGet.RequirementTypeId));
-            });
+            Assert.IsNull(actualRequirement, "The actual requirement should be null for an invalid requirementId");
         }
-    }
+    }   
 }
 

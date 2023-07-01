@@ -27,8 +27,12 @@ namespace Diploma_Zayats.Services
                 var responseData = JObject.Parse(response.Content);
                 return responseData["data"].ToObject<Requirement>();
             }
+            else if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
 
-            return null;
+            throw new Exception($"Failed to retrieve requirement. Status code: {response.StatusCode}");
         }
     }
 }

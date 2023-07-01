@@ -18,9 +18,11 @@ namespace Diploma_Zayats.Pages
         By AddButtonBy = By.XPath("//button[@class='button is-success']");
         By CancelButtonBy = By.XPath("//div[@class='buttons is-right is-fullwidth']/button[@class='button is-white']");
         By GoToFirstIssueElementBy = By.ClassName("has-overflow-wrap");
-        By AttachmentsElementBy = By.Id("dropzone-245");
+        By AttachmentsElementBy = By.XPath("//div[@class='vue-dropzone dropzone']");
         By FileInputBy = By.XPath("//input[@type='file']");
         By AttachedFileBy = By.XPath("//div[@class='column attachment is-narrow has-text-centered']/p");
+        By DeleteAttachmentButonBy = By.ClassName("delete");
+        By ConfirmButtonBy = By.XPath("//button[@class='button is-danger']");
 
         public IssuesPageOfFirstAddedProject(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
         {
@@ -115,7 +117,9 @@ namespace Diploma_Zayats.Pages
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
 
-            wait.Until(ExpectedConditions.ElementToBeClickable(AttachmentsElementBy)).Click();
+            IWebElement attachmentsElement = wait.Until(ExpectedConditions.ElementIsVisible(AttachmentsElementBy));
+
+            attachmentsElement.Click();
 
             return this;
         }
@@ -134,6 +138,45 @@ namespace Diploma_Zayats.Pages
             IWebElement attachedFileElement = wait.Until(ExpectedConditions.ElementIsVisible(AttachedFileBy));
 
             return attachedFileElement.Text;
+        }
+
+        public IssuesPageOfFirstAddedProject ClickDeleteAttachmentButton()
+        {
+
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            IWebElement attachmentsElement = wait.Until(ExpectedConditions.ElementIsVisible(DeleteAttachmentButonBy));
+
+            attachmentsElement.Click();
+
+            return this;
+        }
+
+        public IssuesPageOfFirstAddedProject ClickConfirmButton()
+        {
+
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+
+            IWebElement attachmentsElement = wait.Until(ExpectedConditions.ElementIsVisible(ConfirmButtonBy));
+
+            attachmentsElement.Click();
+
+            return this;
+        }
+
+        public bool IsAttachmentPresent()
+        {
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(AttachedFileBy));
+
+                return false;
+            }
+            catch (NoSuchElementException)
+            {
+                return true;
+            }
         }
     }
 }
