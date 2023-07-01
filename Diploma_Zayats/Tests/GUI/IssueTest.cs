@@ -4,6 +4,7 @@ using Diploma_Zayats.Models;
 using Diploma_Zayats.Pages;
 using Diploma_Zayats.Utilities.Configuration;
 using NUnit.Allure.Attributes;
+using OpenQA.Selenium;
 
 namespace Diploma_Zayats.Tests.GUI
 {
@@ -50,7 +51,7 @@ namespace Diploma_Zayats.Tests.GUI
                 Assert.IsTrue(issuePage.CheckDescriptionInputIsDisplayed());
                 Assert.IsTrue(issuePage.CheckAddButtonIsDisplayed());
                 Assert.IsTrue(issuePage.CheckCancelButtonIsDisplayed());
-            });           
+            });
         }
 
         [Test, Order(2)]
@@ -73,6 +74,10 @@ namespace Diploma_Zayats.Tests.GUI
             issuesPage.UploadFile(filePath);
 
             string attachedFileName = issuesPage.GetAttachedFileName();
+
+            //delete the attachment to run test permanently
+            issuesPage.ClickDeleteAttachmentButton()
+                .ClickConfirmButton();
 
             Assert.AreEqual("attachment.jpeg", attachedFileName);
         }
