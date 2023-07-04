@@ -43,7 +43,7 @@ namespace Diploma_Zayats.Pages
             {
                 return Driver.FindElement(AddIssueButtonBy).Displayed;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -51,13 +51,11 @@ namespace Diploma_Zayats.Pages
 
         public bool CheckIsDialogWindowDisplayed()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                return wait.Until(ExpectedConditions.ElementExists(DialogueWindowElementBy)).Displayed;
+                return Waits.WaitUntilElementExists(DialogueWindowElementBy).Displayed;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -72,13 +70,11 @@ namespace Diploma_Zayats.Pages
 
         public bool CheckCategoryDropdownIsDisplayed()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                return wait.Until(ExpectedConditions.ElementExists(CategoryDropdownElementBy)).Displayed;
+                return Waits.WaitUntilElementExists(CategoryDropdownElementBy).Displayed;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -106,18 +102,14 @@ namespace Diploma_Zayats.Pages
 
         public IssuesPageOfFirstAddedProject GoToFirstIssue()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
-            wait.Until(ExpectedConditions.ElementToBeClickable(GoToFirstIssueElementBy)).Click();
+            Waits.WaitUntilElementClickable(GoToFirstIssueElementBy).Click();
 
             return this;
         }
 
         public IssuesPageOfFirstAddedProject ClickAttachments()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
-            IWebElement attachmentsElement = wait.Until(ExpectedConditions.ElementIsVisible(AttachmentsElementBy));
+            IWebElement attachmentsElement = Waits.WaitUntilElementVisible(AttachmentsElementBy);
 
             attachmentsElement.Click();
 
@@ -133,33 +125,25 @@ namespace Diploma_Zayats.Pages
 
         public string GetAttachedFileName()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
-            IWebElement attachedFileElement = wait.Until(ExpectedConditions.ElementIsVisible(AttachedFileBy));
+            IWebElement attachedFileElement = Waits.WaitUntilElementVisible(AttachedFileBy);
 
             return attachedFileElement.Text;
         }
 
         public IssuesPageOfFirstAddedProject ClickDeleteAttachmentButton()
         {
+            IWebElement deleteArrachmentButton = Waits.WaitUntilElementVisible(DeleteAttachmentButonBy);
 
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
-            IWebElement attachmentsElement = wait.Until(ExpectedConditions.ElementIsVisible(DeleteAttachmentButonBy));
-
-            attachmentsElement.Click();
+            deleteArrachmentButton.Click();
 
             return this;
         }
 
         public IssuesPageOfFirstAddedProject ClickConfirmButton()
         {
+            IWebElement confirmButton = Waits.WaitUntilElementVisible(ConfirmButtonBy);
 
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
-            IWebElement attachmentsElement = wait.Until(ExpectedConditions.ElementIsVisible(ConfirmButtonBy));
-
-            attachmentsElement.Click();
+            confirmButton.Click();
 
             return this;
         }

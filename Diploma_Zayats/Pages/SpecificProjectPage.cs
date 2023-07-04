@@ -45,7 +45,7 @@ namespace Diploma_Zayats.Pages
             {
                 return Driver.FindElement(SettingsButtonBy).Displayed;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return false;
             }

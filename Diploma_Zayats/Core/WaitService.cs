@@ -1,4 +1,5 @@
 ﻿using System;
+using Diploma_Zayats.Utilities.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -14,7 +15,7 @@ namespace Diploma_Zayats.Core
         public WaitService(IWebDriver? driver)
         {
             _driver = driver;
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(Configurator.AppSettings.MaxWaitTime));
         }
 
         public IWebElement? GetVisibleElement(By by)

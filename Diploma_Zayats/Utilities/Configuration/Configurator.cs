@@ -40,6 +40,11 @@ public static class Configurator
             var child = Configuration.GetSection("AppSettings");
 
             appSettings.URL = child["URL"];
+            appSettings.MaxTimeout = int.Parse(child["MaxTimeout"]);
+            appSettings.MaxWaitTime = int.Parse(child["MaxWaitTime"]);
+            appSettings.WaitForPageLoadingTime = int.Parse(child["WaitForPageLoadingTime"]);
+            appSettings.WebDriverWaitTime = int.Parse(child["WebDriverWaitTime"]);
+            //appSettings.Headless = bool.Parse(child["Headless"]);
 
             return appSettings;
         }
@@ -75,6 +80,8 @@ public static class Configurator
     public static User? UserByUsername(string username) => Users.Find(x => x?.Username == username);
 
     public static string? BrowserType => Configuration[nameof(BrowserType)];
+
+    //public static bool Headless => bool.Parse(Configuration[nameof(Headless)]);
 
     private static UserType GetUserType(string userType)
     {
