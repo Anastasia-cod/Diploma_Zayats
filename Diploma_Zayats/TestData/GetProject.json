@@ -1,0 +1,11 @@
+{
+  "id": 34,
+  "name": "Test Project Via Postman 24 June",
+  "description": "New Project via Postman",
+  "symbol_id": 3,
+  "starts_at": "2023-07-07",
+  "ends_at": "2023-09-09",
+  "uses_requirements": true,
+  "uses_issues": true,
+  "completed": false
+}
