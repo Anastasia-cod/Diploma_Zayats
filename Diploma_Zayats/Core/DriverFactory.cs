@@ -1,4 +1,5 @@
 ﻿using System;
+using Diploma_Zayats.Utilities.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -15,7 +16,11 @@ namespace Diploma_Zayats.Core
             chromeOptions.AddArguments("--incognito");
             chromeOptions.AddArguments("--disable-gpu");
             chromeOptions.AddArguments("--disable-extensions");
-            //chromeOptions.AddArguments("--headless");
+
+            //if (Configurator.Headless)
+            //{
+            //    chromeOptions.AddArguments("--headless");
+            //}
 
             chromeOptions.SetLoggingPreference(LogType.Browser, LogLevel.All);
             chromeOptions.SetLoggingPreference(LogType.Driver, LogLevel.All);

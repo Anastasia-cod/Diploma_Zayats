@@ -10,7 +10,7 @@ namespace Diploma_Zayats.Pages
     {
         private static string END_POINT = "settings/archived/projects";
 
-        By BackToProjectsButtonBy = By.XPath("//div[@class='level-item mr-4']");
+        By BackToProjectsButtonBy = By.CssSelector("div.level-item.mr-4");
         By ItemForDisplayedOnThePageElementBy = By.XPath("//span[@class='select']/select");
         By Page100ForDisplayedOnThePageElementBy = By.XPath("//option[@value='100']");
         By LastArchivedProjectElementBy = By.XPath("(//td[@data-label='Project']/div)[last()]");
@@ -50,11 +50,10 @@ namespace Diploma_Zayats.Pages
 
         public string GetArchivedProjectTitle()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                var lastArchivedProjectElement = wait.Until(ExpectedConditions.ElementIsVisible(LastArchivedProjectElementBy));
+                var lastArchivedProjectElement = Waits.WaitUntilElementVisible(LastArchivedProjectElementBy);
+
                 return lastArchivedProjectElement.Text;
             }
             catch (NoSuchElementException)
@@ -65,12 +64,10 @@ namespace Diploma_Zayats.Pages
 
         public void ItemForDisplayedOnThePageClick()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                var lastPageElement = wait.Until(ExpectedConditions.ElementExists(ItemForDisplayedOnThePageElementBy));
-                lastPageElement.Click();
+                var itemForDisplayedOnThePageElement = Waits.WaitUntilElementClickable(ItemForDisplayedOnThePageElementBy);
+                itemForDisplayedOnThePageElement.Click();
             }
             catch (NoSuchElementException)
             {

@@ -42,7 +42,7 @@ namespace Diploma_Zayats.Pages
             {
                 return Driver.FindElement(CreateProjectButtonBy).Displayed;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -50,13 +50,11 @@ namespace Diploma_Zayats.Pages
 
         public bool IsSuccessAlertDisplayed()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                return wait.Until(ExpectedConditions.ElementIsVisible(SuccessAlertElementBy)).Displayed;
+                return Waits.WaitUntilElementVisible(SuccessAlertElementBy).Displayed;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -135,11 +133,9 @@ namespace Diploma_Zayats.Pages
 
         public string GetFirstAddedProjectTitle()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                return wait.Until(ExpectedConditions.ElementExists(FirstAddedProjectElementBy)).Text;
+                return Waits.WaitUntilElementExists(FirstAddedProjectElementBy).Text;
 
             }
             catch (NoSuchElementException)
@@ -150,11 +146,9 @@ namespace Diploma_Zayats.Pages
 
         public string GetLastAddedProjectTitle()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                return wait.Until(ExpectedConditions.ElementExists(LastAddedProjectElementBy)).Text;
+                return Waits.WaitUntilElementExists(LastAddedProjectElementBy).Text;
 
             }
             catch (NoSuchElementException)
@@ -165,11 +159,9 @@ namespace Diploma_Zayats.Pages
 
         public SpecificProjectPage GoToSpecificPage_ClickByLastAddedProjectTitle()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                IWebElement element = wait.Until(ExpectedConditions.ElementExists(LastAddedProjectElementBy));
+                IWebElement element = Waits.WaitUntilElementExists(LastAddedProjectElementBy);
                 element.Click();
 
                 return new SpecificProjectPage(Driver, true);
@@ -182,11 +174,9 @@ namespace Diploma_Zayats.Pages
 
         public SpecificProjectPage GoToSpecificPage_ClickByFirstAddedProjectTitle()
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-
             try
             {
-                IWebElement element = wait.Until(ExpectedConditions.ElementExists(FirstAddedProjectElementBy));
+                IWebElement element = Waits.WaitUntilElementExists(FirstAddedProjectElementBy);
                 element.Click();
 
                 return new SpecificProjectPage(Driver, true);

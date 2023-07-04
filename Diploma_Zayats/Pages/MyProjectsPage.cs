@@ -27,9 +27,9 @@ namespace Diploma_Zayats.Pages
         {
             try
             {
-                return Driver.FindElement(ManageProjectButtonBy).Displayed;
+                return GetManageProjectButton().Displayed;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -37,14 +37,19 @@ namespace Diploma_Zayats.Pages
 
         public SettingsProjectsPage ManageProject()
         {
-            Driver.FindElement(ManageProjectButtonBy).Click();
+            GetManageProjectButton().Click();
 
             return new SettingsProjectsPage(Driver, true);
         }
 
         public bool CheckManageProjectButtonIsDisplayed()
         {
-            return Driver.FindElement(ManageProjectButtonBy).Displayed;
+            return GetManageProjectButton().Displayed;
+        }
+
+        private IWebElement GetManageProjectButton()
+        {
+            return Driver.FindElement(ManageProjectButtonBy);
         }
     }
 }

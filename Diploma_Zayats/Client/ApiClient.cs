@@ -19,7 +19,7 @@ namespace Diploma_Zayats.Client
             {
                 Authenticator = new JwtAuthenticator(Configurator.Admin.Token),
                 ThrowOnAnyError = true,
-                MaxTimeout = 10000
+                MaxTimeout = Configurator.AppSettings.MaxTimeout
             };
 
             _restClient = new RestClient(options);
